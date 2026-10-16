@@ -1,0 +1,33 @@
+[PlasmaViews][Panel 110]
+floating=0
+panelLengthMode=0
+panelVisibility=2
+
+[PlasmaViews][Panel 110][Defaults]
+thickness=32
+
+[PlasmaViews][Panel 134]
+floating=0
+panelLengthMode=0
+panelVisibility=2
+
+[PlasmaViews][Panel 134][Defaults]
+thickness=32
+
+[PlasmaViews][Panel 158]
+alignment=132
+floating=1
+panelLengthMode=1
+panelVisibility=2
+
+[PlasmaViews][Panel 158][Defaults]
+thickness=52
+
+[PlasmaViews][Panel 161]
+alignment=132
+floating=1
+panelLengthMode=1
+panelVisibility=2
+
+[PlasmaViews][Panel 161][Defaults]
+thickness=52

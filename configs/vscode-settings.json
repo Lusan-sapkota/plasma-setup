@@ -1,0 +1,7 @@
+{
+    "editor.fontFamily": "'JetBrains Mono', monospace",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "'JetBrains Mono'",
+    "window.titleBarStyle": "native",
+    "window.customTitleBarVisibility": "never"
+}
