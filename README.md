@@ -75,7 +75,7 @@ For a newer Darkly, take the `kubuntu` deb matching your Kubuntu version from th
 
 - **App menu widget crashed Brave and VS Code in X11 mode.** Adding the global menu widget makes Plasma load `appmenu-gtk-module` into GTK 3 apps. Chromium and Electron apps launched with `--ozone-platform=x11` segfault on startup with it. Fixed by removing `appmenu-gtk3-module`. Native Wayland launches were never affected.
 - **Changing colors can crash running Chromium apps.** Close or restart Brave and VS Code after changing the accent color or color scheme.
-- **"Missing theme snaps" notification at login** comes from `snapd-desktop-integration`, not Plasma. Snap apps cannot see apt-installed icon themes. Disable with `systemctl --user disable --now snap.snapd-desktop-integration.snapd-desktop-integration.service`.
+- **"Missing theme snaps" notification at login** comes from `snapd-desktop-integration`, not Plasma. Snap apps cannot see apt-installed icon themes. The service is enabled system-wide, so `disable` does not stick; mask it for your user instead: `systemctl --user mask --now snap.snapd-desktop-integration.snapd-desktop-integration.service` (undo with `unmask`).
 - **Aurorae decorations need `kwin-style-aurorae`** on Ubuntu, and are QML based, so slower than C++ decorations. This setup does not use Aurorae.
 - **Panel padding does not come from the Plasma style's thick panel margins** for the task manager highlights; editing them made no visible difference.
 
