@@ -77,7 +77,7 @@ For a newer Darkly, take the `kubuntu` deb matching your Kubuntu version from th
 - **Changing colors can crash running Chromium apps.** Close or restart Brave and VS Code after changing the accent color or color scheme.
 - **"Missing theme snaps" notification at login** comes from `snapd-desktop-integration`, not Plasma. Snap apps cannot see apt-installed icon themes. The service is enabled system-wide, so `disable` does not stick; mask it for your user instead: `systemctl --user mask --now snap.snapd-desktop-integration.snapd-desktop-integration.service` (undo with `unmask`).
 - **Aurorae decorations need `kwin-style-aurorae`** on Ubuntu, and are QML based, so slower than C++ decorations. This setup does not use Aurorae.
-- **Blank strip next to the dock after login.** A fit content floating dock can come up wider during login and then shrink, leaving a blank strip beside the icons until any window opens. Changing the dock's opacity in Edit Mode (or opening any window) redraws it and clears the strip. A permanent fix is not confirmed yet.
+- **Blank strip next to the dock after login.** A fit content floating dock came up wider during login and then shrank, leaving a blank strip beside the icons until any window opened. Setting the dock's opacity explicitly to Adaptive in Edit Mode (`panelOpacity=0`) fixed it, confirmed after a fresh login on both screens.
 - **Panel padding does not come from the Plasma style's thick panel margins** for the task manager highlights; editing them made no visible difference.
 
 ## Layout of this repo
