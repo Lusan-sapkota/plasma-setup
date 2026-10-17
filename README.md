@@ -35,7 +35,7 @@ Dock:                  ( task manager only )
 ```
 
 - **Top bar:** 32px, not floating, dodge windows. Launcher, app menu, flexible spacer, clock, flexible spacer, pager, kvitals (CPU usage and temp, RAM, GPU usage, VRAM and temp), margins separator, system tray.
-- **Dock:** 52px, floating, centered, fit content, dodge windows. Task manager only; pin apps with right click > Pin to Task Manager.
+- **Dock:** 52px, floating, centered, fit content, dodge windows, opaque. Task manager only; pin apps with right click > Pin to Task Manager.
 - **Notifications:** popups at the top right (`PopupPosition=TopRight`), not center, so they stay in peripheral vision.
 
 Panel config is in `configs/plasma-panels-appletsrc` and `configs/plasmashellrc`. Panel IDs are machine specific, so rebuild the layout in Edit Mode using those files as reference rather than copying them over.
@@ -77,6 +77,7 @@ For a newer Darkly, take the `kubuntu` deb matching your Kubuntu version from th
 - **Changing colors can crash running Chromium apps.** Close or restart Brave and VS Code after changing the accent color or color scheme.
 - **"Missing theme snaps" notification at login** comes from `snapd-desktop-integration`, not Plasma. Snap apps cannot see apt-installed icon themes. The service is enabled system-wide, so `disable` does not stick; mask it for your user instead: `systemctl --user mask --now snap.snapd-desktop-integration.snapd-desktop-integration.service` (undo with `unmask`).
 - **Aurorae decorations need `kwin-style-aurorae`** on Ubuntu, and are QML based, so slower than C++ decorations. This setup does not use Aurorae.
+- **Blank strip next to the dock after every login.** With a fit content floating panel, the dock starts wider during login and then shrinks, but the blur area behind it keeps the old size, leaving a blurred strip beside the icons until any window opens. Fix: set the dock's opacity to Opaque in Edit Mode (`panelOpacity=1`), so there is no blur area to go stale.
 - **Panel padding does not come from the Plasma style's thick panel margins** for the task manager highlights; editing them made no visible difference.
 
 ## Layout of this repo
