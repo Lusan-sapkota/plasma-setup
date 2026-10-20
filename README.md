@@ -19,11 +19,23 @@ Base: Kubuntu 26.04 LTS, Plasma 6.6.6, Wayland, two screens.
 | Icons | Papirus-Dark | Colors & Themes > Icons |
 | Cursor | Breeze, size 30 | Colors & Themes > Cursors |
 | Splash screen | None | Colors & Themes > Splash Screen |
-| Fonts | Inter 10 (toolbar 9, small 8, window titles 10 Medium), JetBrains Mono 10 fixed | Text & Fonts |
+| Fonts | Inter 10 (toolbar 9, small 8, window titles 10 Medium), JetBrainsMono Nerd Font 10 fixed | Text & Fonts |
 | Animation speed | 0.5x duration | General Behavior |
 | Wallpaper | One 4K image, also on lock screen and login screen | Desktop, Screen Locking, Login Screen (SDDM) |
 
 Darkly app style and decoration are compiled C++ like Breeze, so they cost about the same. Keep Darkly's transparency options off or low; those are the only settings with a real GPU cost.
+
+## Terminal and editor
+
+Monospace everywhere is JetBrainsMono Nerd Font: the same JetBrains Mono glyphs plus the icons Starship needs. Use the plain `JetBrainsMono Nerd Font` family, not the `Nerd Font Mono` variant, which shrinks icons to one cell.
+
+| Part | Choice | Config |
+|---|---|---|
+| Konsole profile | "Catppuccin" (default), Catppuccin Mocha colors, JetBrainsMono Nerd Font 10 | `configs/konsole-Catppuccin.profile`, `configs/konsole-catppuccin-mocha.colorscheme`, `configs/konsolerc` |
+| Shell prompt | Starship, `catppuccin-powerline` preset (Mocha palette) | `configs/starship.toml` |
+| VS Code | Catppuccin Mocha theme, JetBrainsMono Nerd Font in editor and terminal, ligatures off | `configs/vscode-settings.json` |
+
+Konsole's menus and frame stay Breeze Dark; only the terminal area is Catppuccin.
 
 ## Panels
 
@@ -50,12 +62,22 @@ Installed:
 | `papirus-icon-theme` | Ubuntu | |
 | `fonts-inter` | Ubuntu | |
 | `fonts-jetbrains-mono` | Ubuntu | |
+| JetBrainsMono Nerd Font | [ryanoasis/nerd-fonts releases](https://github.com/ryanoasis/nerd-fonts/releases), `JetBrainsMono.zip` | Unzipped into `~/.local/share/fonts/JetBrainsMonoNerd/` |
+| Starship 1.27.0 | [starship.rs](https://starship.rs) install script | In `~/.local/bin`, no sudo |
+| Catppuccin for VS Code | `Catppuccin.catppuccin-vsc` extension | |
 
 ```sh
 sudo apt install papirus-icon-theme fonts-inter fonts-jetbrains-mono
 
 curl -LO https://github.com/Bali10050/Darkly/releases/download/v0.5.41/darkly-0.5.41_kubuntu-26.04_amd64.deb
 sudo apt install ./darkly-0.5.41_kubuntu-26.04_amd64.deb
+
+mkdir -p ~/.local/share/fonts/JetBrainsMonoNerd
+curl -LO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+unzip JetBrainsMono.zip -d ~/.local/share/fonts/JetBrainsMonoNerd && fc-cache -f
+
+curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
+echo 'eval "$(starship init bash)"' >> ~/.bashrc
 ```
 
 For a newer Darkly, take the `kubuntu` deb matching your Kubuntu version from the releases page and install it the same way.
@@ -69,7 +91,9 @@ For a newer Darkly, take the `kubuntu` deb matching your Kubuntu version from th
 5. Put the wallpaper in `~/Pictures/Wallpapers/` (never Downloads, desktop and lock screen point at the file directly). Set it for desktop and lock screen.
 6. Login Screen (SDDM): Apply Plasma Settings, then the gear on Breeze to pick the wallpaper. Plasma copies it into the theme, so the login screen keeps it.
 7. Panels as described above, notifications top right.
-8. VS Code: `configs/vscode-settings.json` (JetBrains Mono with ligatures, native title bar).
+8. VS Code: install the Catppuccin extension, then `configs/vscode-settings.json` (Catppuccin Mocha, JetBrainsMono Nerd Font, native title bar).
+9. Konsole: copy `configs/konsole-Catppuccin.profile` to `~/.local/share/konsole/Catppuccin.profile` and `configs/konsole-catppuccin-mocha.colorscheme` to `~/.local/share/konsole/catppuccin-mocha.colorscheme`, then merge `configs/konsolerc` (or pick the profile in Settings > Configure Konsole > Profiles > Set as Default).
+10. Starship: copy `configs/starship.toml` to `~/.config/starship.toml`. Remove any custom `PS1` from `~/.bashrc`, since Starship sets its own. Keep `eval "$(zoxide init ...)"` after the Starship line, at the very end, or zoxide warns about a configuration issue.
 
 ## Gotchas
 
