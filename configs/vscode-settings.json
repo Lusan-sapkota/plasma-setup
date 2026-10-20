@@ -3,6 +3,36 @@
     "editor.fontLigatures": false,
     "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font'",
     "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.iconTheme": "catppuccin-mocha",
+    "catppuccin.accentColor": "red",
+    "catppuccin.customUIColors": {
+        "mocha": {
+            "button.foreground": "text",
+            "activityBarBadge.foreground": "text",
+            "extensionButton.prominentForeground": "text",
+            "inputValidation.errorForeground": "text"
+        }
+    },
+    "catppuccin.colorOverrides": {
+        "mocha": {
+            "red": "#DA2623",
+            "maroon": "#C84945",
+            "flamingo": "#D0AEA9",
+            "rosewater": "#EDE9E6",
+            "text": "#EDE9E6",
+            "subtext1": "#CEC2BD",
+            "subtext0": "#A19A96",
+            "overlay2": "#917F81",
+            "overlay1": "#7E7A79",
+            "overlay0": "#656262",
+            "surface2": "#4E4F55",
+            "surface1": "#3D3E43",
+            "surface0": "#262931",
+            "base": "#181C24",
+            "mantle": "#13161D",
+            "crust": "#0E1016"
+        }
+    },
     "window.titleBarStyle": "native",
     "window.customTitleBarVisibility": "never"
 }

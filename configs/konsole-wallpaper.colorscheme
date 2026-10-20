@@ -1,29 +1,29 @@
 [Background]
-Color=30,30,46
+Color=24,28,36
 
 [BackgroundFaint]
-Color=30,30,46
+Color=24,28,36
 
 [BackgroundIntense]
-Color=30,30,46
+Color=24,28,36
 
 [Color0]
-Color=108,112,134
+Color=101,98,98
 
 [Color0Faint]
-Color=108,112,134
+Color=101,98,98
 
 [Color0Intense]
-Color=108,112,134
+Color=101,98,98
 
 [Color1]
-Color=243,139,168
+Color=218,38,35
 
 [Color1Faint]
-Color=243,139,168
+Color=218,38,35
 
 [Color1Intense]
-Color=243,139,168
+Color=218,38,35
 
 [Color2]
 Color=166,227,161
@@ -71,26 +71,26 @@ Color=137,220,235
 Color=137,220,235
 
 [Color7]
-Color=205,214,244
+Color=237,233,230
 
 [Color7Faint]
-Color=205,214,244
+Color=237,233,230
 
 [Color7Intense]
-Color=205,214,244
+Color=237,233,230
 
 [Foreground]
-Color=205,214,244
+Color=237,233,230
 
 [ForegroundFaint]
-Color=205,214,244
+Color=237,233,230
 
 [ForegroundIntense]
-Color=205,214,244
+Color=237,233,230
 
 [General]
 Blur=false
 ColorRandomization=false
-Description=Catppuccin Mocha
+Description=Wallpaper
 Opacity=1
 Wallpaper=

@@ -29,13 +29,26 @@ Darkly app style and decoration are compiled C++ like Breeze, so they cost about
 
 Monospace everywhere is JetBrainsMono Nerd Font: the same JetBrains Mono glyphs plus the icons Starship needs. Use the plain `JetBrainsMono Nerd Font` family, not the `Nerd Font Mono` variant, which shrinks icons to one cell.
 
+Terminal and editor colors come from the wallpaper, with the accent `#DA2623` as the primary color everywhere:
+
+| Role | Color |
+|---|---|
+| Ink (backgrounds) | `#181C24` |
+| Paper (text) | `#EDE9E6` |
+| Warm greys | `#CEC2BD` `#A19A96` `#917F81` `#656262` `#3D3E43` |
+| Reds | `#DA2623` (accent) `#C84945` `#9E2122` `#5F1C22` |
+| Blush | `#D0AEA9` |
+
+Text on a solid `#DA2623` background is always paper white. Text on mauve `#CBA6F7` stays ink, because white on that light purple is about 2:1 contrast.
+
 | Part | Choice | Config |
 |---|---|---|
-| Konsole profile | "Catppuccin" (default), Catppuccin Mocha colors, JetBrainsMono Nerd Font 10 | `configs/konsole-Catppuccin.profile`, `configs/konsole-catppuccin-mocha.colorscheme`, `configs/konsolerc` |
-| Shell prompt | Starship, `catppuccin-powerline` preset (Mocha palette) | `configs/starship.toml` |
-| VS Code | Catppuccin Mocha theme, JetBrainsMono Nerd Font in editor and terminal, ligatures off | `configs/vscode-settings.json` |
+| Konsole profile | "Catppuccin" (default), `wallpaper` color scheme (Catppuccin Mocha with ink background, paper text, accent red), JetBrainsMono Nerd Font 10 | `configs/konsole-Catppuccin.profile`, `configs/konsole-wallpaper.colorscheme`, `configs/konsolerc` |
+| Shell prompt | Starship, `catppuccin-powerline` preset with a custom `wallpaper` palette: red user segment with white text, then mauve shades `#CBA6F7` `#BC96EC` `#AD87E0` `#9E78D4` with ink text. `scan_timeout = 100` | `configs/starship.toml` |
+| VS Code | Catppuccin Mocha, accent red, `colorOverrides` mapping the base, surface and text colors to the wallpaper palette, `customUIColors` for white text on red buttons and badges. Syntax colors stay Catppuccin's | `configs/vscode-settings.json` |
+| fastfetch | Custom logo pre-rendered to colored text with `chafa`, printed as `file-raw` | `configs/fastfetch-config.jsonc` |
 
-Konsole's menus and frame stay Breeze Dark; only the terminal area is Catppuccin.
+Konsole's menus and frame stay Breeze Dark; only the terminal area uses the wallpaper scheme.
 
 ## Panels
 
@@ -65,6 +78,7 @@ Installed:
 | JetBrainsMono Nerd Font | [ryanoasis/nerd-fonts releases](https://github.com/ryanoasis/nerd-fonts/releases), `JetBrainsMono.zip` | Unzipped into `~/.local/share/fonts/JetBrainsMonoNerd/` |
 | Starship 1.27.0 | [starship.rs](https://starship.rs) install script | In `~/.local/bin`, no sudo |
 | Catppuccin for VS Code | `Catppuccin.catppuccin-vsc` extension | |
+| `fastfetch` 2.57.1, `chafa` | Ubuntu | `chafa` is only needed to re-render the logo |
 
 ```sh
 sudo apt install papirus-icon-theme fonts-inter fonts-jetbrains-mono
@@ -91,9 +105,10 @@ For a newer Darkly, take the `kubuntu` deb matching your Kubuntu version from th
 5. Put the wallpaper in `~/Pictures/Wallpapers/` (never Downloads, desktop and lock screen point at the file directly). Set it for desktop and lock screen.
 6. Login Screen (SDDM): Apply Plasma Settings, then the gear on Breeze to pick the wallpaper. Plasma copies it into the theme, so the login screen keeps it.
 7. Panels as described above, notifications top right.
-8. VS Code: install the Catppuccin extension, then `configs/vscode-settings.json` (Catppuccin Mocha, JetBrainsMono Nerd Font, native title bar).
-9. Konsole: copy `configs/konsole-Catppuccin.profile` to `~/.local/share/konsole/Catppuccin.profile` and `configs/konsole-catppuccin-mocha.colorscheme` to `~/.local/share/konsole/catppuccin-mocha.colorscheme`, then merge `configs/konsolerc` (or pick the profile in Settings > Configure Konsole > Profiles > Set as Default).
+8. VS Code: install the Catppuccin extension, then merge `configs/vscode-settings.json` (Catppuccin Mocha with wallpaper overrides, JetBrainsMono Nerd Font, native title bar). Reload the window if the overrides do not show.
+9. Konsole: copy `configs/konsole-Catppuccin.profile` to `~/.local/share/konsole/Catppuccin.profile` and `configs/konsole-wallpaper.colorscheme` to `~/.local/share/konsole/wallpaper.colorscheme`, then merge `configs/konsolerc` (or pick the profile in Settings > Configure Konsole > Profiles > Set as Default).
 10. Starship: copy `configs/starship.toml` to `~/.config/starship.toml`. Remove any custom `PS1` from `~/.bashrc`, since Starship sets its own. Keep `eval "$(zoxide init ...)"` after the Starship line, at the very end, or zoxide warns about a configuration issue.
+11. fastfetch: copy `configs/fastfetch-config.jsonc` to `~/.config/fastfetch/config.jsonc`, then render the logo: `chafa -f symbols -c full -s 44x24 <image> > ~/.config/fastfetch/logo.txt`.
 
 ## Gotchas
 
@@ -102,6 +117,9 @@ For a newer Darkly, take the `kubuntu` deb matching your Kubuntu version from th
 - **"Missing theme snaps" notification at login** comes from `snapd-desktop-integration`, not Plasma. Snap apps cannot see apt-installed icon themes. The service is enabled system-wide, so `disable` does not stick; mask it for your user instead: `systemctl --user mask --now snap.snapd-desktop-integration.snapd-desktop-integration.service` (undo with `unmask`).
 - **Aurorae decorations need `kwin-style-aurorae`** on Ubuntu, and are QML based, so slower than C++ decorations. This setup does not use Aurorae.
 - **Blank strip next to the dock after login.** A fit content floating dock came up wider during login and then shrank, leaving a blank strip beside the icons until any window opened. Setting the dock's opacity explicitly to Adaptive in Edit Mode (`panelOpacity=0`) fixed it, confirmed after a fresh login on both screens.
+- **fastfetch `chafa` logo falls back to the OS logo in Konsole.** Live `chafa` rendering needs `libchafa` installed and a terminal that reports its character pixel size, and Konsole does not (`getCharacterPixelDimensions() failed` with `--show-errors`). Pre-rendering the image to a text file and using `"type": "file-raw"` works in every terminal. Do not set `logo.width` for `file-raw`; fastfetch measures the file and adds the width on top.
+- **A fastfetch config without a `modules` list shows no info at all**, only the logo. Start from `fastfetch --gen-config` and keep its module list.
+- **Starship shows the Node version in `~`** when a stray `~/node_modules` exists (an `npm install` run in the home folder). Delete it; it also leaks old packages into every project under `~` through Node's parent folder lookup.
 - **Panel padding does not come from the Plasma style's thick panel margins** for the task manager highlights; editing them made no visible difference.
 
 ## Layout of this repo

@@ -29,11 +29,12 @@ $cmd_duration\
 $line_break\
 $character"""
 
-palette = 'catppuccin_mocha'
+scan_timeout = 100
+palette = 'wallpaper'
 
 [os]
 disabled = false
-style = "bg:red fg:crust"
+style = "bg:red fg:text"
 
 [os.symbols]
 Windows = " "
@@ -61,8 +62,8 @@ Void = " "
 
 [username]
 show_always = true
-style_user = "bg:red fg:crust"
-style_root = "bg:red fg:crust"
+style_user = "bg:red fg:text"
+style_root = "bg:red fg:text"
 format = '[$user]($style)'
 
 [directory]
@@ -378,3 +379,16 @@ surface0 = "#e0e4e8"
 base = "#fcfcfc"
 mantle = "#fafafa"
 crust = "#f8f9fa"
+
+[palettes.wallpaper]
+red = "#DA2623"
+peach = "#CBA6F7"
+yellow = "#BC96EC"
+green = "#AD87E0"
+sapphire = "#9E78D4"
+lavender = "#CBA6F7"
+maroon = "#C84945"
+text = "#EDE9E6"
+base = "#181C24"
+mantle = "#181C24"
+crust = "#181C24"

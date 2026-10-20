@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=catppuccin-mocha
+ColorScheme=wallpaper
 Font=JetBrainsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [General]
